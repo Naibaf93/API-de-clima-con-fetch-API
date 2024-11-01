@@ -60,9 +60,39 @@ function buscarClima(e) {
             .then(  respuesta => respuesta.json())
             .then(  datos => {
                 console.log(datos);
-                
+
+                limpiarHTML(); // Limpiar el HTML previo
+
                 if(datos.cod ==="404") {
                     mostrarError('Ciudad no encontrada')
+                    return;
                 }
+
+                // Imprimiendo la respuesta en el HTML
+                mostrarClima(datos);
             })        
+    }
+
+    function mostrarClima(datos) {
+        const { main: { temp, temp_max, temp_min } } = datos;
+
+        const centigrados = kelvinACentigrados(temp);
+        
+        const actual = document.createElement('p');
+        actual.innerHTML = `${centigrados} &#8451;`;
+        actual.classList.add('font-bold' , 'text-6xl');
+
+        const resultadoDiv = document.createElement('div');
+        resultadoDiv.classList.add('text-center', 'text-white');
+        resultadoDiv.appendChild(actual);
+        
+        resultado.appendChild(resultadoDiv);
+    }
+
+    const kelvinACentigrados = (grados) => parseInt(grados -273.15);
+    
+    function limpiarHTML() {
+        while(resultado.firstChild){
+            resultado.removeChild(resultado.firstChild);
+        }
     }
