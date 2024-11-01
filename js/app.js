@@ -56,6 +56,8 @@ function buscarClima(e) {
         const appId ='5421013a9626ae008e2776f2ccafb0bc';
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
 
+        spinner(); // Muestra un spinner de carga
+
         fetch(url)
             .then(  respuesta => respuesta.json())
             .then(  datos => {
@@ -112,4 +114,22 @@ function buscarClima(e) {
         while(resultado.firstChild){
             resultado.removeChild(resultado.firstChild);
         }
+    }
+
+    function spinner() {
+
+        limpiarHTML();
+
+        const divSpinner = document.createElement('div');
+        divSpinner.classList.add('spinner');
+
+        divSpinner.innerHTML = `
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>        
+        `;
+
+        resultado.appendChild(divSpinner);
     }
