@@ -19,12 +19,13 @@ function buscarClima(e) {
         return;
     }
 
-    spinner();
+    spinner(); // Llamando al Spinner
 
     // Consultamos la API
+    
     setTimeout(() => {
         consultarAPI(ciudad, pais);
-    }, 2000);   
+    }, 2000); // Eliminar el spinner después de 2 segundos  
 }
 
     // Crear un alerta
@@ -51,7 +52,6 @@ function buscarClima(e) {
                 alerta.remove();
             }, 5000);
         }
-
     }
 
     function consultarAPI(ciudad, pais) {
@@ -135,8 +135,4 @@ function buscarClima(e) {
         `;
 
         resultado.appendChild(divSpinner);
-        // Eliminar el spinner después de 3 segundos
-        setTimeout(() => {
-            divSpinner.remove();
-        }, 7000);
     }
