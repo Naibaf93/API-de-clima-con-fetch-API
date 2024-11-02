@@ -19,9 +19,12 @@ function buscarClima(e) {
         return;
     }
 
+    spinner();
+
     // Consultamos la API
-    consultarAPI(ciudad, pais);
-    
+    setTimeout(() => {
+        consultarAPI(ciudad, pais);
+    }, 2000);   
 }
 
     // Crear un alerta
@@ -83,7 +86,7 @@ function buscarClima(e) {
         const min = kelvinACentigrados(temp_min);
 
         const nombreCiudad = document.createElement('p');
-        nombreCiudad.textContent = `Clima en ${name}`;
+        nombreCiudad.textContent = `El clima en ${name}`;
         nombreCiudad.classList.add('font-bold', 'text-2xl')
         
         const actual = document.createElement('p');
@@ -132,4 +135,8 @@ function buscarClima(e) {
         `;
 
         resultado.appendChild(divSpinner);
+        // Eliminar el spinner después de 3 segundos
+        setTimeout(() => {
+            divSpinner.remove();
+        }, 7000);
     }
